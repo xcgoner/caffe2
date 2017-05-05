@@ -1,5 +1,7 @@
 {
-  "allowDirectMerges": false,
+  "allowDirectMerges": [
+    "gh-pages"
+  ],
   "allowBotCommands": false,
   "internalRepository": "fbsource",
   "cannedReplies": {
