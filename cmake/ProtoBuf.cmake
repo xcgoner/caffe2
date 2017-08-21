@@ -44,14 +44,16 @@ elseif (ANDROID OR IOS)
       libprotoc protoc PROPERTIES
       EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
 else()
-  find_package( Protobuf )
-  if ( NOT (Protobuf_FOUND OR PROTOBUF_FOUND) )
-    custom_protobuf_find()
-  else()
-    # Adding PROTOBUF_LIBRARY for legacy support.
-    list(APPEND Caffe2_DEPENDENCY_LIBS ${PROTOBUF_LIBRARIES} ${PROTOBUF_LIBRARY})
-    include_directories(SYSTEM ${PROTOBUF_INCLUDE_DIR})
-  endif()
+  # Always find custom version
+  custom_protobuf_find()
+  # find_package( Protobuf )
+  # if ( NOT (Protobuf_FOUND OR PROTOBUF_FOUND) )
+  #   custom_protobuf_find()
+  # else()
+  #   # Adding PROTOBUF_LIBRARY for legacy support.
+  #   list(APPEND Caffe2_DEPENDENCY_LIBS ${PROTOBUF_LIBRARIES} ${PROTOBUF_LIBRARY})
+  #   include_directories(SYSTEM ${PROTOBUF_INCLUDE_DIR})
+  # endif()
 endif()
 
 if (NOT (Protobuf_FOUND OR PROTOBUF_FOUND) )
