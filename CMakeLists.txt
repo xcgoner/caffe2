@@ -4,6 +4,9 @@ project(Caffe2 CXX C)
 
 # TODO(bwasti): versioning
 
+# fix some bugs
+set(${CMAKE_CXX_FLAGS} "-D_FORCE_INLINES ${CMAKE_CXX_FLAGS}")
+
 # Useful functions.
 function (exclude OUTPUT INPUT)
 set(EXCLUDES ${ARGN})
@@ -32,7 +35,8 @@ enable_testing()
 # cmake/Summary.cmake
 option(BUILD_BINARY "Build C++ binaries" ON)
 option(BUILD_PYTHON "Build Python binaries" ON)
-option(BUILD_SHARED_LIBS "Build libcaffe2.so" ON)
+# use static libraries by default
+option(BUILD_SHARED_LIBS "Build libcaffe2.so" OFF)
 option(BUILD_TEST "Build C++ test binaries (need gtest and gbenchmark)" ON)
 option(USE_CUDA "Use Cuda" ON)
 option(USE_FFMPEG "Use ffmpeg" OFF)
@@ -90,7 +94,7 @@ endif()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "binaries")
 
 # ---[ Build flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -fPIC")
 if(NOT MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O2 -fPIC")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-narrowing")

@@ -27,4 +27,4 @@ cmake .. \
     -DPROTOBUF_PROTOC_EXECUTABLE=$CAFFE2_ROOT/build_host_protoc/bin/protoc \
     -DBUILD_SHARED_LIBS=OFF \
     || exit 1
-make
+make -j5
